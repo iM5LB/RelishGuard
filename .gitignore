@@ -1,0 +1,42 @@
+# Build outputs
+build/
+.gradle/
+out/
+run/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Misc
+graphify-out/
+*.log
+*.hprof
+*.jfr
+
+# Secrets / local env — never commit
+.env
+.env.*
+*.pem
+*.key
+secrets.properties
+local.properties
+
+# Docs publish worktree leftovers
+.gitignore.public
+```
+
+Hmm — `.gitignore.public` is used by publish-docs.bat as template for public repo; keep it ignored in private? The bat reads it from working dir (`%~dp0.gitignore.public`) — ignoring it in git is fine since it reads from disk not git. But does the file exist? Check. Also `allatori.jar` — keep tracked (needed for builds, private repo OK).
+
+Wait, should I exclude allatori.jar? It's a commercial tool (demo). Committing to private repo is user's choice — they said private repo to protect code; allatori.jar in private repo is fine and needed for reproducible builds. Keep it.
+
+Check .gitignore.public exists.<|close|>think<|sep|><|open|>response<|sep|><|close|>response<|sep|><|open|>tools<|sep|><|open|>call tool="exec" index="1"<|sep|><|open|>argument key="command" type="string"<|sep|>ls -la /d/Projects/RelishGuard/.gitignore* /d/Projects/RelishGuard/LICENSE 2>/dev/null; cat /d/Projects/RelishGuard/.gitignore.public 2>/dev/null | head -20; grep -rn "license.txt\|install.id\|RL-\|TRL-" /d/Projects/RelishGuard/src/main/resources/ | head -5<|close|>argument<|sep|><|open|>argument key="command" type="string"<|sep|>cd /d/Projects/RelishGuard && git init -b main 2>&1 | tail -2 && git remote add private https://github.com/iM5LB/RelishGuard-private.git && git remote add public https://github.com/iM5LB/RelishGuard.git && git remote -v | head -4<|close|>argument<|sep|><|open|>argument key="command" type="string"<|sep|>cd /d/Projects/RelishGuard && git status --short | head -20 && git status --short | wc -l<|close|>argument<|sep|><|close|>call<|sep|><|close|>tools<|sep|><|close|>message<|sep|><|end_of_msg|>|
+
